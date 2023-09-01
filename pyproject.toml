@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "niddy-bot"
+version = "0.1.0"
+description = "NDIS bot"
+authors = ["IsisChameleon <12711084+IsisChameleon@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+langchain = "^0.0.276"
+chromadb = "^0.3.29"
+openai = "^0.27.10"
+pytest = "^7.4.0"
+streamlit = "^1.26.0"
+tiktoken = "^0.4.0"
+python-dotenv = "^1.0.0"
+matplotlib = "^3.7.2"
+pysqlite3-binary = "^0.5.1"
+pdfplumber = "^0.10.2"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.25.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

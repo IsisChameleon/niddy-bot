@@ -1,0 +1,16 @@
+{
+    "python.defaultInterpreterPath": "/workspaces/niddy-bot/.venv/bin/python",
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.analysis.extraPaths": [
+        "./src/ndis/modules",
+        "./src/ndis/modules"
+    ],
+    "pytest.command": "/workspaces/niddy-bot/.venv/bin/pytest",
+    "python.testing.pytestArgs": [
+        "/workspaces/niddy-bot/src/tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "pytest_runner.check_config": true,
+    
+}

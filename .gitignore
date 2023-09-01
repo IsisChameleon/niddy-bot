@@ -1,0 +1,8 @@
+data/**
+.env
+config.py
+*.pyc
+.chroma
+__pycache__
+.pytest_cache
+gdrive-service-account.json
