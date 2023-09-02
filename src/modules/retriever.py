@@ -1,7 +1,8 @@
 from langchain.vectorstores import Chroma
 from langchain.embeddings import OpenAIEmbeddings
 from chromadb.config import Settings
-from chromadb import HttpClient
+# from chromadb import HttpClient
+from chromadb import Client
 from chromadb.api import API
 
 class ChromaRetriever:
@@ -11,9 +12,10 @@ class ChromaRetriever:
             chroma_server_host="host.docker.internal",  # when you run this inside a devcontainer you need to explicitely say host.docker.internal to signify "devcontainer host localhost"
             chroma_server_http_port="8000")
     
-    def __init__(self):    
-        self.client: API = HttpClient(host="host.docker.internal", port="8000")
-        self.client_settings = self._localhost_client_settings
+    def __init__(self, client_settings=None):    
+        
+        self.client_settings = client_settings=client_settings or self._localhost_client_settings
+        self.client: API = Client(settings=self.client_settings)
         self.chromaDb = None
         
     # def createCollection(self, collection_name:str, loader, splitter):

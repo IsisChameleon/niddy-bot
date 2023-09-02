@@ -18,6 +18,18 @@ class Chatbot:
         self.model_name = model_name
         self.temperature = temperature
         self.retriever = retriever
+        
+        self.llm = ChatOpenAI(model_name=self.model_name, temperature=self.temperature)
+        self.memory = AnswerConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        self.conversational_qa_chain = ConversationalRetrievalChain.from_llm(
+                                                        llm=self.llm, 
+                                                        retriever=self.retriever, 
+                                                        verbose=True, 
+                                                        return_source_documents=True, 
+                                                        max_tokens_limit=4097, 
+                                                        rephrase_question = True, #
+                                                        memory=self.memory, #
+                                                        combine_docs_chain_kwargs={'prompt': CombineChainPrompt})
 
         print(f'Chatbot initialized with {model_name}, temperature {self.temperature} and retriever {self.retriever}')
 
@@ -46,27 +58,27 @@ class Chatbot:
         """
         Start a conversational chat with a model via Langchain
         """
-        llm = ChatOpenAI(model_name=self.model_name, temperature=self.temperature)
-        memory = AnswerConversationBufferMemory(memory_key="chat_history", return_messages=True)
-        conversational_qa_chain = ConversationalRetrievalChain.from_llm(
-                                                        llm=llm, 
-                                                        retriever=self.retriever, 
-                                                        verbose=True, 
-                                                        return_source_documents=True, 
-                                                        max_tokens_limit=4097, 
-                                                        rephrase_question = True, #
-                                                        memory=memory, #
-                                                        combine_docs_chain_kwargs={'prompt': CombineChainPrompt})
+        # llm = ChatOpenAI(model_name=self.model_name, temperature=self.temperature)
+        # memory = AnswerConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        # conversational_qa_chain = ConversationalRetrievalChain.from_llm(
+        #                                                 llm=llm, 
+        #                                                 retriever=self.retriever, 
+        #                                                 verbose=True, 
+        #                                                 return_source_documents=True, 
+        #                                                 max_tokens_limit=4097, 
+        #                                                 rephrase_question = True, #
+        #                                                 memory=memory, #
+        #                                                 combine_docs_chain_kwargs={'prompt': CombineChainPrompt})
 
         # chain_input = {"question": query, "chat_history": st.session_state["history"]}
         # result = conversational_qa_chain(chain_input)
-        answer, source_documents = self.send_query(prompt=query, chain=conversational_qa_chain)
+        answer, source_documents = self.send_query(prompt=query, chain=self.conversational_qa_chain)
 
         #count_tokens_chain(chain, chain_input)
-        return answer
+        return answer, source_documents
 
 
-def count_tokens_chain(chain, query):
-    with get_openai_callback() as cb:
-        result = chain.run(query)
-    return result, cb.total_tokens 
+# def count_tokens_chain(chain, query):
+#     with get_openai_callback() as cb:
+#         result = chain.run(query)
+#     return result, cb.total_tokens 

@@ -6,3 +6,4 @@ config.py
 __pycache__
 .pytest_cache
 gdrive-service-account.json
+secrets.toml

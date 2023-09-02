@@ -27,15 +27,3 @@ class MyDirectoryLoader:
                 docs.extend(loaded_docs)
         return docs
     
-# class Chunker:
-#     def __init__(self, loader, splitter):
-#         self.loader = loader
-#         self.splitter = splitter
-        
-#     def chunk(self):
-#         docs = self.loader.load()
-#         chunked_docs = self.splitter.split_documents(docs)
-#         return chunked_docs
-    
-# splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=128)
-# chunked_docs = splitter.split_documents(docs)
