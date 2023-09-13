@@ -1,0 +1,3 @@
+[chromadb]
+
+client_type='persistent'  # ephemeral, persistent, httpclient

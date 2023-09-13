@@ -7,10 +7,10 @@ A helpful conversational bot to answer NDIS invoicing questions.
 
 # Installation
 
-. 1 Get an OpenAI API Key on https://platform.openai.com/
+## . 1 Get an OpenAI API Key on https://platform.openai.com/
 
 
-. 2 Install Chroma (open source vector database) in server mode in your localhost
+## . 2 Install Chroma (open source vector database) in server mode in your localhost
 
 First, get docker if you don't have it. https://www.docker.com/products/docker-desktop/
 
@@ -26,13 +26,24 @@ docker-compose up -d --build
 
 PS. At the time of writing (9 Sept 2023) it is important to clone that specific version of Chroma because langchain is not yet adapted to the breaking changes.
 
-. 3 Finally clone this repo.
+## . 3 Finally clone this repo.
 
 ```
-https://github.com/IsisChameleon/niddy-bot.git
+clone https://github.com/IsisChameleon/niddy-bot.git
 ```
 
-. 4 Start VSCODE on this folder
+## . 4 Add relevant documents
+
+In the data folder, collect the relevant PDF documents from NDIS that you want the bot to answer questions about. They need to be pdfs or csvs files.
+
+![Alt text](image-1.png)
+
+e.g. check documents available in this website
+https://www.ndis.gov.au/providers/pricing-arrangements
+
+
+
+## . 5 Start VSCODE niddy-bot repository folder
 If you don't have it already install the "Dev Containers" extension from Microsoft that's going to use the devcontainers: ms-vscode-remote.remote-containers
 
 Once inside the container:

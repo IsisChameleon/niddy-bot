@@ -11,23 +11,34 @@ class ChromaRetriever:
             chroma_api_impl="rest",
             chroma_server_host="host.docker.internal",  # when you run this inside a devcontainer you need to explicitely say host.docker.internal to signify "devcontainer host localhost"
             chroma_server_http_port="8000")
+    _persistent_client_settings = Settings(
+            chroma_db_impl="duckdb+parquet")
     
-    def __init__(self, client_settings=None):    
+    def __init__(self, client_type='ephemeral', client_settings=None):    
         
-        self.client_settings = client_settings=client_settings or self._localhost_client_settings
-        self.client: API = Client(settings=self.client_settings)
+        self.client_settings = None
+        
+        if client_type is 'ephemeral':
+            self.client: API = Client()
+        else:
+            if client_type == 'persistent':
+                self.client_settings = client_settings or self._persistent_client_settings
+            if client_type == 'httpclient':
+                self.client_settings = client_settings or self._localhost_client_settings
+            self.client: API = Client(settings=self.client_settings)
+            
         self.chromaDb = None
-        
-    # def createCollection(self, collection_name:str, loader, splitter):
-    #     docs = loader.load()
-    #     chunked_docs = splitter.split_documents(docs)
-    #     db = Chroma.from_documents(chunked_docs, client_settings=self.client_settings, embedding = OpenAIEmbeddings(), collection_name=collection_name)
-        
-    # def fromNewCollection(self, collection_name:str, loader, splitter, k: int=5):
-    #     if (collection_name is None or ''):
-    #         raise ValueError(f'Error. Please provide a collection name.')
-    #     self.createCollection(collection_name, loader, splitter)
-    #     return self.fromExistingCollection(collection_name, k)
+    
+    def rebuild(self, collection_name: str, search_kwargs={ "k" : 5 },  newCollection_kwargs=None):
+        if (collection_name is None or ''):
+            raise ValueError(f'Error. Please provide a collection name.')
+
+        collections = self.client.list_collections()
+        names = [c.name for c in collections]
+        if collection_name in names:
+            self.client.delete_collection(name=collection_name)
+
+        return self.build(collection_name, search_kwargs, newCollection_kwargs)
     
     def build(self, collection_name: str, search_kwargs={ "k" : 5 },  newCollection_kwargs=None):
         if (collection_name is None or ''):

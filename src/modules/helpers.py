@@ -1,4 +1,5 @@
 import streamlit as st
+from dotenv import load_dotenv
 import os
 
 def load_api_key():
@@ -10,12 +11,8 @@ def load_api_key():
         st.sidebar.success("API key loaded from sidebar", icon="🚀")
         return user_api_key
     
-    if st.secrets["OPENAI_API_KEY"] is not None:
-        user_api_key = st.secrets["OPENAI_API_KEY"]
-        st.sidebar.success("API key loaded from secrets", icon="🚀")
-        return user_api_key 
-    
-    return user_api_key
+    load_dotenv(override=True)
+    return os.getenv("OPENAI_API_KEY")
 
     
 
