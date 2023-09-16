@@ -1,4 +1,9 @@
-{
+Lots of problem getting this to work
+
+pay attention to settings.json
+
+
+
     "python.defaultInterpreterPath": "/workspaces/niddy-bot/.venv/bin/python",
     "python.terminal.activateEnvInCurrentTerminal": true,
     "python.analysis.extraPaths": [
@@ -22,5 +27,9 @@
         "-p",
         "test_*.py"
     ]
-    
-}
+
+
+Pay attention to env variables
+
+(niddy-bot-py3.11) vscode ➜ /workspaces/niddy-bot (main) $ export PYTHONPATH=$PYTHONPATH:/workspaces/niddy-bot/src
+(niddy-bot-py3.11) vscode ➜ /workspaces/niddy-bot (main) $ export PYTHONPATH=$PYTHONPATH:/workspaces/niddy-bot/src/tests

@@ -35,3 +35,5 @@ ENV VENV_ROOT="/workspaces/${PROJECT}/.venv"
 ENV PATH="${VENV_ROOT}/bin:${HOME}/.local/bin:$PATH"
 
 RUN curl -sSL https://install.python-poetry.org
+
+ENV PYTHONPATH="${PYTHONPATH}:/workspaces/niddy-bot/src"
