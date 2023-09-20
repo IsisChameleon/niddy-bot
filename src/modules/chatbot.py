@@ -2,13 +2,14 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.callbacks import get_openai_callback
 from langchain.memory import ConversationBufferMemory
+from modules.memory import AnswerConversationBufferMemory
 from modules.prompts import CombineChainPrompt
 
 # #fix Error: module 'langchain' has no attribute 'verbose'
 # import langchain
 # langchain.verbose = False
 
-COLLECTION_NAME = 'NDIS_ALL_PDFPLUMBER_TEXTS_1024_128'
+COLLECTION_NAME = 'NDIS_ALL_PDFPLUMBER_TEXTS_1024_256'
 
 class Chatbot:
 
@@ -18,7 +19,7 @@ class Chatbot:
         self.retriever = retriever
         
         self.llm = ChatOpenAI(model_name=self.model_name, temperature=self.temperature)
-        self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        self.memory = AnswerConversationBufferMemory(memory_key="chat_history", return_messages=True)
         self.conversational_qa_chain = ConversationalRetrievalChain.from_llm(
                                                         llm=self.llm, 
                                                         retriever=self.retriever, 
@@ -39,7 +40,9 @@ class Chatbot:
         for document in res['source_documents']:
             page_content = document.page_content
             source = document.metadata['source']
-            page = document.metadata['page']
+            page=1
+            if 'page' in document.metadata.keys():
+                page =document.metadata['page']
             document_string = f'content: "{page_content}"'
             if source not in source_documents:
                 source_documents[source] = {}

@@ -27,7 +27,7 @@ def setupChatbot(model, temperature):
         "loader": loader,
         "splitter": splitter
     }
-    retriever = ChromaRetriever().build(COLLECTION_NAME, search_kwargs, newCollection_kwargs)
+    retriever = ChromaRetriever(client_type='ephemeral').build(COLLECTION_NAME, search_kwargs, newCollection_kwargs)
     return Chatbot(model, temperature, retriever)
 
 def initConversation():
