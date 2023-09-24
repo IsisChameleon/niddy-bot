@@ -5,7 +5,7 @@ from modules.layout import Layout
 from modules.helpers import load_api_key
 from modules.sidebar import Sidebar
 from modules.chatbot import Chatbot
-from modules.retriever import ChromaRetriever
+from modules.retrievers.faiss import FaissRetriever
 from modules.loaders import MyDirectoryLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
@@ -24,7 +24,12 @@ def setupChatbot(model, temperature):
         "loader": loader,
         "splitter": splitter
     }
-    retriever = ChromaRetriever(client_type='ephemeral').build(COLLECTION_NAME, search_kwargs, newCollection_kwargs)
+    retriever = FaissRetriever().build(COLLECTION_NAME, search_kwargs, newCollection_kwargs)
+  
+    print('LANGCHAIN_TRACING_V2:', os.getenv('LANGCHAIN_TRACING_V2'))
+    print('LANGCHAIN_ENDPOINT:', os.getenv('LANGCHAIN_PROJECT'))
+    print('LANGCHAIN_PROJECT:', os.getenv('LANGCHAIN_PROJECT'))
+
     return Chatbot(model, temperature, retriever)
 
 def initConversation():

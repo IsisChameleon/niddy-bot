@@ -9,3 +9,5 @@ secrets.toml
 manual-tests
 datatest
 .streamlit
+*.faiss
+*.pkl

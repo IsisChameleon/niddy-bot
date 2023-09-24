@@ -3,6 +3,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.callbacks import get_openai_callback
 from modules.memory import AnswerConversationBufferMemory
 from modules.prompts import CombineChainPrompt
+import os
 
 # #fix Error: module 'langchain' has no attribute 'verbose'
 # import langchain
@@ -53,6 +54,9 @@ class Chatbot:
         """
         Start a conversational chat with a model via Langchain
         """
+        print('LANGCHAIN_TRACING_V2:', os.getenv('LANGCHAIN_TRACING_V2'))
+        print('LANGCHAIN_ENDPOINT:', os.getenv('LANGCHAIN_PROJECT'))
+        print('LANGCHAIN_PROJECT:', os.getenv('LANGCHAIN_PROJECT'))
         res = self.conversational_qa_chain({"question" : query})
         answer, source_documents = self.process_response(res=res)
         return answer, source_documents

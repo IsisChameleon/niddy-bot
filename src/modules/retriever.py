@@ -5,6 +5,15 @@ from chromadb.config import Settings
 from chromadb import Client
 from chromadb.api import API
 
+
+class FaissRetriever:
+    def __init__(self, client_type='ephemeral', client_settings=None): 
+        pass
+    def rebuild(self, collection_name: str, search_kwargs={ "k" : 5 },  newCollection_kwargs=None):
+        pass
+    def build(self, collection_name: str, search_kwargs={ "k" : 5 },  newCollection_kwargs=None):
+        pass
+
 class ChromaRetriever:
     
     _localhost_client_settings = Settings(
