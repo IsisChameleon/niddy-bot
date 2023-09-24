@@ -17,8 +17,10 @@ class ChromaRetriever:
     def __init__(self, client_type='ephemeral', client_settings=None):    
         
         self.client_settings = None
+        if client_type not in ['ephemeral', 'persistent', 'httpclient']:
+            raise ValueError(f"Please input existing client type: 'ephemeral', 'persistent', 'httpclient'")
         
-        if client_type is 'ephemeral':
+        if client_type == 'ephemeral':
             self.client: API = Client()
         else:
             if client_type == 'persistent':

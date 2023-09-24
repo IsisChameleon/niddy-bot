@@ -47,8 +47,8 @@ class Sidebar:
         st.session_state["temperature"] = temperature
         
     def show_options(self):
-        if "tweak_model" not in st.session_state:
-            st.session_state.tweak_model = False
+        if "tweak" not in st.session_state:
+            st.session_state.tweak = False
         with st.sidebar.expander("⚙️ Tweak Niddy", expanded=False):
 
             self.reset_chat_button()

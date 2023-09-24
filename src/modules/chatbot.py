@@ -1,7 +1,6 @@
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.callbacks import get_openai_callback
-from langchain.memory import ConversationBufferMemory
 from modules.memory import AnswerConversationBufferMemory
 from modules.prompts import CombineChainPrompt
 

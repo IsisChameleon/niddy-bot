@@ -1,8 +1,5 @@
 import streamlit as st
 import os
-from io import StringIO
-import re
-import sys
 from modules.chathistory import ChatHistory
 from modules.layout import Layout
 from modules.helpers import load_api_key
@@ -38,8 +35,6 @@ def initConversation():
 #Config
 st.set_page_config(layout="wide", page_icon="💬", page_title="Niddy, the Ndis Invoicing Helper Bot")
 
-
-
 #Title
 st.markdown(
     """
@@ -49,11 +44,12 @@ st.markdown(
 
 st.markdown("---")
 
-
 #Description
 st.markdown(
     """ 
-    <h5 style='text-align:center;'>I'm Niddy, a chatbot created to help you invoicing for an NDIS participant</h5>
+    <h5 style='text-align:center;'>I'm Niddy, a chatbot created to help you invoicing for an NDIS participant</h5>  
+      
+    Don't enter any PII information such as person names, participant numbers, phone numbers, card details in this chat!!!!
     """,
     unsafe_allow_html=True)
 st.markdown("---")
@@ -76,13 +72,14 @@ else:
     
     # Initialize the chatbot if first time or the chat history if button clicked
     if st.session_state["reset_chat"] or \
-        st.session_state["tweak_model"] or \
+        st.session_state["tweak"] or \
         "chatbot" not in st.session_state:
+            
         chatbot, history = initConversation()
         print(chatbot)
         print(history)
         st.session_state["reset_chat"] = False
-        st.session_state["tweak_model"] = False
+        st.session_state["tweak"] = False
         st.session_state["chatbot"] = chatbot
 
     history.display_chat_messages_history()
@@ -99,15 +96,7 @@ else:
             message_placeholder = st.empty()
             full_response = ""
             assistant_response, references = st.session_state["chatbot"].conversational_chat(prompt)
-            # Simulate stream of response with milliseconds delay
-            # for chunk in assistant_response.split():
-            #     full_response += chunk + " "
-            #     # Add a blinking cursor to simulate typing
-            #     message_placeholder.markdown(full_response + "▌")
             message_placeholder.markdown(assistant_response)
             
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": assistant_response})
-
-
-
