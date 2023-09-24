@@ -54,9 +54,6 @@ class Chatbot:
         """
         Start a conversational chat with a model via Langchain
         """
-        print('LANGCHAIN_TRACING_V2:', os.getenv('LANGCHAIN_TRACING_V2'))
-        print('LANGCHAIN_ENDPOINT:', os.getenv('LANGCHAIN_PROJECT'))
-        print('LANGCHAIN_PROJECT:', os.getenv('LANGCHAIN_PROJECT'))
         res = self.conversational_qa_chain({"question" : query})
         answer, source_documents = self.process_response(res=res)
         return answer, source_documents

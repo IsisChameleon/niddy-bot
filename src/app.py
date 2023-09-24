@@ -25,10 +25,6 @@ def setupChatbot(model, temperature):
         "splitter": splitter
     }
     retriever = FaissRetriever().build(COLLECTION_NAME, search_kwargs, newCollection_kwargs)
-  
-    print('LANGCHAIN_TRACING_V2:', os.getenv('LANGCHAIN_TRACING_V2'))
-    print('LANGCHAIN_ENDPOINT:', os.getenv('LANGCHAIN_PROJECT'))
-    print('LANGCHAIN_PROJECT:', os.getenv('LANGCHAIN_PROJECT'))
 
     return Chatbot(model, temperature, retriever)
 
