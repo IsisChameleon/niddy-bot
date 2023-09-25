@@ -36,19 +36,16 @@ class TestChatbot(unittest.TestCase):
     @patch('modules.chatbot.ChatOpenAI')
     @patch('modules.chatbot.ConversationalRetrievalChain.from_llm')
     def test_init(self, mock_from_llm, mock_ChatOpenAI):
-        
-        chatbot = self.chatbot
+        chatbot = Chatbot(self.model_name, self.temperature, self.retriever)
         self.assertEqual(chatbot.model_name, self.model_name)
         self.assertEqual(chatbot.temperature, self.temperature)
         self.assertEqual(chatbot.retriever, self.retriever)
         mock_ChatOpenAI.assert_called_with(model_name=self.model_name, temperature=self.temperature)
-        print(chatbot.llm)
 
     @patch('modules.chatbot.ChatOpenAI')
     @patch('modules.chatbot.ConversationalRetrievalChain.from_llm')
     def test_process_response(self, mock_from_llm, mock_ChatOpenAI):
         
-
         chatbot = self.chatbot
         
         answer, source_documents = chatbot.process_response(self.mock_res)
