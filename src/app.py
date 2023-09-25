@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+from pathlib import Path
 from modules.chathistory import ChatHistory
 from modules.layout import Layout
 from modules.helpers import load_api_key
@@ -11,8 +12,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 COLLECTION_NAME = 'NDIS_ALL_PDFPLUMBER_TEXTS_1024_256'
 
-from pathlib import Path
-
 def getDataFolder():
 # Get the current working directory
     current_dir = Path.cwd()
@@ -23,15 +22,14 @@ def getDataFolder():
     print(f"Parent Directory: {parent_dir}")
 
     # Get the 'data' subfolder of the parent directory
-    data_subfolder = parent_dir / "data"
+    data_subfolder = current_dir / "data"
     print(f"'data' Subfolder of Parent: {data_subfolder}")
     
     return data_subfolder
 
 
 def setupChatbot(model, temperature):
-    dataFolder = getDataFolder() 
-    loader = MyDirectoryLoader(dir_path = dataFolder)
+    loader = MyDirectoryLoader(dir_path = '/mount/src/niddy-bot/data')
     splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=256)
     search_kwargs = {
         "distance_metric": "cos",
