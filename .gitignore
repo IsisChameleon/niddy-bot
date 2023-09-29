@@ -8,6 +8,7 @@ gdrive-service-account.json
 secrets.toml
 manual-tests
 datatest
+datatest2
 .streamlit
 *.faiss
 *.pkl
