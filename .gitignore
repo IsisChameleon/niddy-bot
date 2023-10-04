@@ -12,3 +12,5 @@ datatest2
 .streamlit
 *.faiss
 *.pkl
+lib
+*.html

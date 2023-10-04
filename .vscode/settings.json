@@ -21,6 +21,11 @@
         "/workspaces/niddy-bot/src/tests",
         "-p",
         "test_*.py"
-    ]
+    ],
+    "notebook.output.wordWrap": false,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true
+      }
     
 }
