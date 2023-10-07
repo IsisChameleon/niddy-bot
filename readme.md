@@ -34,10 +34,11 @@ git clone https://github.com/IsisChameleon/niddy-bot.git
 
 After cloning the repo create a .env file in the root folder of the repo, just under niddy-bot
 
-![image](https://github.com/IsisChameleon/niddy-bot/assets/12711084/a005b6a2-c57d-4f5c-b935-df04450ab67e)
-In there add the following line with your own OPENAI_API_KEY from step 1.
+![image](https://github.com/IsisChameleon/niddy-bot/assets/12711084/a005b6a2-c57d-4f5c-b935-df04450ab67e)  
 
-```OPENAI_API_KEY = 'sk-...'```
+In there add the following line with your own OPENAI_API_KEY from step 1.  
+
+OPENAI_API_KEY = 'sk-...'  
 
 
 ## . 4 Add relevant documents
