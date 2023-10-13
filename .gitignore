@@ -14,3 +14,7 @@ datatest2
 *.pkl
 lib
 *.html
+*.whl
+src/notebooks/storage_graph/docstore.json
+src/notebooks/storage_graph/index_store.json
+src/notebooks/storage_graph/vector_store.json

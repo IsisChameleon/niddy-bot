@@ -2,7 +2,8 @@
     "python.defaultInterpreterPath": "/workspaces/niddy-bot/.venv/bin/python",
     "python.terminal.activateEnvInCurrentTerminal": true,
     "python.analysis.extraPaths": [
-        "./src/modules"
+        "./src/modules",
+        "/workspaces/niddy-bot/.venv/lib/python3.11/site-packages"
     ],
     "python.envFile": "${workspaceFolder}/src/tests/.env",
 
